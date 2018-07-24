@@ -12,17 +12,17 @@ class ClientsController extends Controller
 
 
     /**
-     * @Route("/clients", name="index_clients")
+     * @Route("/guests", name="index_clients")
      **/
     public function showIndex()
     {
 
-
+        return $this->render("clients/index.html.twig");
 
     }
 
     /**
-     * @Route("/clients/modify/", name="modify_client")
+     * @Route("/guests/modify/", name="modify_client")
      **/
     public function showDetails()
     {
@@ -32,7 +32,7 @@ class ClientsController extends Controller
     }
 
     /**
-     * @Route("/clients/new", name="new_client")
+     * @Route("/guests/new", name="new_client")
      **/
     public function showNew()
     {

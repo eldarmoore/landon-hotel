@@ -9,12 +9,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ReservationsController extends Controller
 {
-    
+
+    /**
+     * @Route("/reservations", name="reservations")
+     **/
     public function showIndex()
     {
 
-        
+
     }
-    
+
 
 }

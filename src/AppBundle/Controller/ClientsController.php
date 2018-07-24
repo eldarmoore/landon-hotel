@@ -11,27 +11,33 @@ class ClientsController extends Controller
 {
 
 
-    
+    /**
+     * @Route("/clients", name="index_clients")
+     **/
     public function showIndex()
     {
-        
-        
-        
+
+
+
     }
 
-    
+    /**
+     * @Route("/clients/modify/", name="modify_client")
+     **/
     public function showDetails()
     {
 
-        
+
 
     }
 
-    
+    /**
+     * @Route("/clients/new", name="new_client")
+     **/
     public function showNew()
     {
 
-        
+
     }
 
 }

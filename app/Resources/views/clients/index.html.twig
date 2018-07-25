@@ -15,22 +15,16 @@
           <th width="200">Action</th>
         </tr>
         </thead>
+        {% for client in clients %}
         <tr>
-          <td>Mr. Roy Adams</td>
-          <td>radams1v@xinhuanet.com</td>
+          <td>{{ client.title | capitalize }}. {{ client.name }} {{ client.last_name }}</td>
+          <td>{{ client.email }}</td>
           <td>
             <a class="hollow button" href="/client/edit/1">EDIT</a>
             <a class="hollow button warning" href="{{ path("booking", { 'id_client': 1 }) }}">BOOK A ROOM</a>
           </td>
         </tr>
-        <tr>
-          <td>Ms. Bonnie Clark</td>
-          <td>bclark@bing.com</td>
-          <td>
-            <a class="hollow button" href="#">EDIT</a>
-            <a class="hollow button warning" href="#">BOOK A ROOM</a>
-          </td>
-        </tr>
+        {% endfor %}
         </tbody>
       </table>
     </div>

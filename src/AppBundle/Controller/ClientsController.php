@@ -162,4 +162,14 @@ class ClientsController extends Controller
         
     }
 
+    /**
+     * @Route("/github")
+     */
+    public function github()
+    {
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET','https://api.github.com/users/eldarmoore');
+        return new Response('<pre>' . $res->getBody());
+    }
+
 }

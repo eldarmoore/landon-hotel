@@ -69,8 +69,33 @@ class ClientsController extends Controller
         $data['form'] = [];
         $data['titles'] = $this->titles;
 
-        $client_data = $this->client_data[$id_client];
-        $data['form'] = $client_data;
+        
+
+        $form = $this   ->createFormBuilder()
+                        ->add('name')
+                        ->add('last_name')
+                        ->add('title')
+                        ->add('address')
+                        ->add('zip_code')
+                        ->add('city')
+                        ->add('state')
+                        ->add('email')
+                        ->getForm()
+                ;
+
+        $form->handleRequest( $request );
+
+        if( $form->isSubmitted() )
+        {
+            $form_data = $form->getData();
+            $data['form'] = [];
+            $data['form'] = $form_data;
+        }else
+        {
+            $client_data = $this->client_data[$id_client];
+            $data['form'] = $client_data;
+        }
+
         return $this->render("clients/form.html.twig", $data);
 
     }
@@ -83,6 +108,9 @@ class ClientsController extends Controller
 
         $data = [];
         $data['mode'] = 'new_client';
+        $data['titles'] = $this->titles;
+        $data['form'] = [];
+        $data['form']['title'] = '';
         
         return $this->render("clients/form.html.twig", $data);
         

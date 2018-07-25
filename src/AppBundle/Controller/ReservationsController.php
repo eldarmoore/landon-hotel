@@ -84,7 +84,7 @@ class ReservationsController extends Controller
 		$client = $this
 					->getDoctrine()
 					->getRepository('AppBundle:Client')
-					->find($id_room);
+					->find($id_client);
 		$room = $this
 					->getDoctrine()
 					->getRepository('AppBundle:Room')
@@ -98,6 +98,9 @@ class ReservationsController extends Controller
 
 		$em->persist($reservation);
 		$em->flush();
+
+		//$data['debug']['client'] = $client;
+		//return $this->render('debug.html.twig', $data);
 
 		return $this->redirectToRoute('index_clients');
 

@@ -63,7 +63,9 @@ private $client_data = [
     public function showDetails()
     {
 
-
+        $data = [];
+        $data['clients'] = $this->client_data;
+        return $this->render("clients/index.html.twig", $data);
 
     }
 
@@ -73,6 +75,9 @@ private $client_data = [
     public function showNew()
     {
 
+        $data = [];
+        $data['clients'] = $this->client_data;
+        return $this->render("clients/index.html.twig", $data);
 
     }
 

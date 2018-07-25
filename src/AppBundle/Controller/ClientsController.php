@@ -10,6 +10,8 @@ use AppBundle\Entity\Client;
 
 class ClientsController extends Controller
 {
+
+    
     
     private $titles = ['mr', 'ms', 'mrs', 'dr', 'mx'];
 
@@ -20,8 +22,10 @@ class ClientsController extends Controller
     {
         
         $data = [];
-        // $data['clients'] = $this->client_data;
-        $clients = $this->getDoctrine()->getRepository('AppBundle:Client')->findAll();
+        //$data['clients'] = $this->client_data;
+        $clients = $this->getDoctrine()
+                    ->getRepository('AppBundle:Client')
+                    ->findAll();
         $data['clients'] = $clients;
         return $this->render("clients/index.html.twig", $data);
         
@@ -34,8 +38,9 @@ class ClientsController extends Controller
     {
 
         $data = [];
-        // $data['clients'] = $this->client_data;
-        $client_repo = $this->getDoctrine()->getRepository('AppBundle:Client');
+        //$data['clients'] = $this->client_data;
+        $client_repo = $this->getDoctrine()
+                            ->getRepository('AppBundle:Client');
         $data['mode'] = 'modify';
         $data['form'] = [];
         $data['titles'] = $this->titles;
@@ -71,16 +76,18 @@ class ClientsController extends Controller
             $client->setCity($form_data['city']);
             $client->setState($form_data['state']);
             $client->setEmail($form_data['email']);
-
-            $em = $this->getDoctrine()->getManager();
+            
+            $em = $this->getDoctrine()
+                    ->getManager();
             $em->flush();
 
             return $this->redirectToRoute('index_clients');
+
         }else
         {
-            // $client_data = $this->client_data[$id_client];
+            //$client_data = $this->client_data[$id_client];
             $client = $client_repo->find($id_client);
-
+            
             $client_data['id'] = $client->getId();
             $client_data['title'] = $client->getTitle();
             $client_data['name'] = $client->getName();
@@ -113,16 +120,16 @@ class ClientsController extends Controller
         $data['form']['title'] = '';
 
         $form = $this   ->createFormBuilder()
-            ->add('name')
-            ->add('last_name')
-            ->add('title')
-            ->add('address')
-            ->add('zip_code')
-            ->add('city')
-            ->add('state')
-            ->add('email')
-            ->getForm()
-        ;
+                        ->add('name')
+                        ->add('last_name')
+                        ->add('title')
+                        ->add('address')
+                        ->add('zip_code')
+                        ->add('city')
+                        ->add('state')
+                        ->add('email')
+                        ->getForm()
+                ;
 
         $form->handleRequest( $request );
 
@@ -148,6 +155,7 @@ class ClientsController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('index_clients');
+
         }
         
         return $this->render("clients/form.html.twig", $data);

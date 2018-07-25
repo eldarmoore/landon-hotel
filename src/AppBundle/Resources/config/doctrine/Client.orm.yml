@@ -37,3 +37,7 @@ AppBundle\Entity\Client:
             length: '100'
             unique: true
     lifecycleCallbacks: {  }
+    oneToMany:
+        reservations:
+            targetEntity: Reservation
+            mappedBy: client

@@ -254,5 +254,50 @@ class Client
     {
         return $this->email;
     }
-}
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $reservations;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add reservation
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     *
+     * @return Client
+     */
+    public function addReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservation
+     *
+     * @param \AppBundle\Entity\Reservation $reservation
+     */
+    public function removeReservation(\AppBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations->removeElement($reservation);
+    }
+
+    /**
+     * Get reservations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+}

@@ -80,5 +80,62 @@ class Reservation
     {
         return $this->dateOut;
     }
-}
+    /**
+     * @var \AppBundle\Entity\Client
+     */
+    private $client;
 
+    /**
+     * @var \AppBundle\Entity\Room
+     */
+    private $room;
+
+
+    /**
+     * Set client
+     *
+     * @param \AppBundle\Entity\Client $client
+     *
+     * @return Reservation
+     */
+    public function setClient(\AppBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \AppBundle\Entity\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set room
+     *
+     * @param \AppBundle\Entity\Room $room
+     *
+     * @return Reservation
+     */
+    public function setRoom(\AppBundle\Entity\Room $room = null)
+    {
+        $this->room = $room;
+
+        return $this;
+    }
+
+    /**
+     * Get room
+     *
+     * @return \AppBundle\Entity\Room
+     */
+    public function getRoom()
+    {
+        return $this->room;
+    }
+}

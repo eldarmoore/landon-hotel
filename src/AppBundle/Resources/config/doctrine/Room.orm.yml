@@ -18,3 +18,7 @@ AppBundle\Entity\Room:
             type: string
             length: 255
     lifecycleCallbacks: {  }
+    oneToMany:
+        reservations:
+            targetEntity: Reservation
+            mappedBy: room

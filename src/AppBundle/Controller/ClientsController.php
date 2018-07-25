@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Client;
 
 class ClientsController extends Controller
 {
@@ -111,6 +112,44 @@ class ClientsController extends Controller
         $data['titles'] = $this->titles;
         $data['form'] = [];
         $data['form']['title'] = '';
+
+        $form = $this   ->createFormBuilder()
+            ->add('name')
+            ->add('last_name')
+            ->add('title')
+            ->add('address')
+            ->add('zip_code')
+            ->add('city')
+            ->add('state')
+            ->add('email')
+            ->getForm()
+        ;
+
+        $form->handleRequest( $request );
+
+        if( $form->isSubmitted() )
+        {
+            $form_data = $form->getData();
+            $data['form'] = [];
+            $data['form'] = $form_data;
+
+            $em = $this->getDoctrine()->getManager();
+            $client = new Client();
+            $client->setTitle($form_data['title']);
+            $client->setName($form_data['name']);
+            $client->setLastName($form_data['last_name']);
+            $client->setAddress($form_data['address']);
+            $client->setZipCode($form_data['zip_code']);
+            $client->setCity($form_data['city']);
+            $client->setState($form_data['state']);
+            $client->setEmail($form_data['email']);
+
+            $em->persist($client);
+
+            $em->flush();
+
+            return $this->redirectToRoute('index_clients');
+        }
         
         return $this->render("clients/form.html.twig", $data);
         

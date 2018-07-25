@@ -10,39 +10,6 @@ use AppBundle\Entity\Client;
 
 class ClientsController extends Controller
 {
-
-    private $client_data = [
-                            [  'id' => 0 , 
-                                'title' => 'mr', 
-                                'name' => 'Roy', 
-                                'last_name' => 'Adams', 
-                                'address' => '2872 Marquette Street',
-                                'zip_code' => '10312',
-                                'city' => 'New York City',
-                                'state' => 'NY',
-                                'email' => 'radams1v@example.com' 
-                            ],
-                            [  'id' => 1 , 
-                                'title' => 'mrs', 
-                                'name' => 'Bonnie', 
-                                'last_name' => 'Clark', 
-                                'address' => '4 Porter Avenue',
-                                'zip_code' => '80028',
-                                'city' => 'Louisville',
-                                'state' => 'CO',
-                                'email' => 'bclark6@example.com' 
-                            ],
-                            [  'id' => 2 , 
-                                'title' => 'ms', 
-                                'name' => 'Carol', 
-                                'last_name' => 'Shaw', 
-                                'address' => '650 Grover Alley',
-                                'zip_code' => '30305',
-                                'city' => 'Atlanta',
-                                'state' => 'GA',
-                                'email' => 'cshaw@example.com' 
-                            ]
-                        ];
     
     private $titles = ['mr', 'ms', 'mrs', 'dr', 'mx'];
 
@@ -53,7 +20,9 @@ class ClientsController extends Controller
     {
         
         $data = [];
-        $data['clients'] = $this->client_data;
+        // $data['clients'] = $this->client_data;
+        $clients = $this->getDoctrine()->getRepository('AppBundle:Client')->findAll();
+        $data['clients'] = $clients;
         return $this->render("clients/index.html.twig", $data);
         
     }
@@ -65,7 +34,8 @@ class ClientsController extends Controller
     {
 
         $data = [];
-        $data['clients'] = $this->client_data;
+        // $data['clients'] = $this->client_data;
+        $client_repo = $this->getDoctrine()->getRepository('AppBundle:Client');
         $data['mode'] = 'modify';
         $data['form'] = [];
         $data['titles'] = $this->titles;
@@ -93,7 +63,21 @@ class ClientsController extends Controller
             $data['form'] = $form_data;
         }else
         {
-            $client_data = $this->client_data[$id_client];
+            // $client_data = $this->client_data[$id_client];
+            $client = $client_repo->find($id_client);
+
+            $client_data['id'] = $client->getId();
+            $client_data['title'] = $client->getTitle();
+            $client_data['name'] = $client->getName();
+            $client_data['last_name'] = $client->getLastName();
+            $client_data['address'] = $client->getAddress();
+            $client_data['zip_code'] = $client->getZipCode();
+            $client_data['city'] = $client->getCity();
+            $client_data['state'] = $client->getState();
+            $client_data['email'] = $client->getEmail();
+
+            $client_data['titles'] = $this->titles;
+
             $data['form'] = $client_data;
         }
 

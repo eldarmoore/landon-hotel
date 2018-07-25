@@ -67,6 +67,7 @@ class ClientsController extends Controller
         $data['clients'] = $this->client_data;
         $data['mode'] = 'modify';
         $data['form'] = [];
+        $data['titles'] = $this->titles;
 
         $client_data = $this->client_data[$id_client];
         $data['form'] = $client_data;

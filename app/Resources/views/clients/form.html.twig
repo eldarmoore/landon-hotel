@@ -7,8 +7,9 @@
           <div class="medium-4  columns">
             <label>Title</label>
             <select name="form[title]">
-
-              <option value="mr">Mr.</option>
+              {% for title in titles %}
+              <option value="{{ title }}" {{ title == form.title ? 'selected' : '' }}>{{ title | capitalize }}.</option>
+              {% endfor %}
             </select>
           </div>
           <div class="medium-4  columns">

@@ -1,0 +1,18 @@
+AppBundle\Entity\Reservation:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ReservationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        dateIn:
+            type: datetime
+            column: date_in
+        dateOut:
+            type: datetime
+            column: date_out
+    lifecycleCallbacks: {  }
